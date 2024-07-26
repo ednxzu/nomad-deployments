@@ -1,0 +1,10 @@
+[
+  {
+    "clusterID": "{{with secret "kv_hs/hashistack/ceph/cluster_info/cluster_id"}}{{.Data.data.id}}{{end}}",
+    "monitors": [
+      "10.1.20.101",
+      "10.1.20.102",
+      "10.1.20.103"
+    ]
+  }
+]

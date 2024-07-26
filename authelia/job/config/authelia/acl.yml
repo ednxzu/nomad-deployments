@@ -1,0 +1,27 @@
+access_control:
+  default_policy: deny
+  rules:
+    ## bypass rule
+    - domain: "auth.ednz.fr"
+      policy: bypass
+    ## api rule
+    - domain: "*.ednz.fr"
+      resources:
+        - "^/api([/?].*)?$"
+        - "^/identity.*$"
+        - "^/triggers.*$"
+        - "^/meshagents.*$"
+        - "^/meshsettings.*$"
+        - "^/agent.*$"
+        - "^/control.*$"
+        - "^/meshrelay.*$"
+        - "^/wl.*$"
+      policy: bypass
+    ## apex rule
+    - domain: "ednz.fr"
+      policy: bypass
+    ## catch-all
+    - domain: "*.ednz.fr"
+      subject:
+        - "group:admins"
+      policy: one_factor

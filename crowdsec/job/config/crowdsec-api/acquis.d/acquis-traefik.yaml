@@ -1,0 +1,5 @@
+---
+filenames:
+  - /crowdsec-logs/traefik/*
+labels:
+  type: traefik

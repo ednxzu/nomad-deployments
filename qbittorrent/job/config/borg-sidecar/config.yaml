@@ -1,0 +1,28 @@
+source_directories:
+  - /backup-qbittorrent-data
+repositories:
+  - path: ssh://borg@10.1.30.20:2222/backup/{{ env "NOMAD_JOB_NAME" }}/
+one_file_system: false
+remote_path: /usr/bin/borg
+
+ssh_command: ssh -i /root/.ssh/id_borg
+compression: lz4
+archive_name_format: '{{ env "NOMAD_JOB_NAME" }}-{now}'
+unknown_unencrypted_repo_access_is_ok: true
+
+keep_daily: 7
+keep_weekly: 4
+keep_monthly: 6
+keep_yearly: 1
+
+checks:
+  - name: repository
+  - name: archives
+check_last: 3
+
+before_backup:
+  - echo "Starting a backup job."
+after_backup:
+  - echo "Backup created."
+on_error:
+  - echo "Error while creating a backup."

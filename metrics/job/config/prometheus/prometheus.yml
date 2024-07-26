@@ -1,0 +1,65 @@
+# global config
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+      # - alertmanager:9093
+
+rule_files: []
+
+scrape_configs:
+  - job_name: "self"
+    static_configs:
+      - targets: ["localhost:9090"]
+  - job_name: "nomad_servers"
+    scheme: https
+    tls_config:
+      ca_file: "/secrets/ednz_ca.pem"
+    params:
+      format: [prometheus]
+    metrics_path: "/v1/metrics"
+    static_configs:
+      - targets: ["hs1.ednz.fr:4646", "hs2.ednz.fr:4646", "hs3.ednz.fr:4646"]
+  - job_name: "dns-servers"
+    static_configs:
+      - targets: ["ns1.ednz.fr:9617", "ns2.ednz.fr:9617"]
+
+  - job_name: "consul"
+    scheme: http
+    metrics_path: "/metrics"
+    consul_sd_configs:
+      - server: consul.service.consul:8501
+        token: '{{with secret "kv_hs/hashistack/consul/integration_tokens/prometheus_service_discovery"}}{{.Data.data.token}}{{end}}'
+        scheme: https
+        tls_config:
+          ca_file: "/secrets/ednz_ca.pem"
+        tags:
+          - fr.ednz_cloud.prometheus.enable=true
+        tag_separator: ","
+        allow_stale: true
+        refresh_interval: 30s
+    relabel_configs:
+      - source_labels: [__meta_consul_service]
+        action: replace
+        regex: "(.+)-exporter"
+        replacement: ${1}
+        target_label: job
+      - source_labels: [__meta_consul_tags]
+        action: replace
+        regex: ".*,fr.ednz_cloud.prometheus.metrics_path=([^,]+),.*"
+        replacement: ${1}
+        target_label: __metrics_path__
+      - source_labels: [__meta_consul_tags]
+        action: replace
+        regex: ".*,fr.ednz_cloud.prometheus.scrape_interval=([^,]+),.*"
+        replacement: ${1}
+        target_label: __scrape_interval__
+      - source_labels: [__meta_consul_tags]
+        action: replace
+        regex: ".*,fr.ednz_cloud.prometheus.param_format=([^,]+),.*"
+        replacement: ${1}
+        target_label: __param_format

@@ -1,0 +1,1 @@
+{{with secret "kv_hs/hashistack/nomad/services/borgmatic"}}{{.Data.data.private_key}}{{end}}

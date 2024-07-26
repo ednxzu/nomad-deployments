@@ -1,0 +1,21 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://localhost:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: {{env "NOMAD_JOB_NAME"}}
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: {{env "NOMAD_JOB_NAME"}}
+          allocation: {{env "NOMAD_SHORT_ALLOC_ID"}}
+          group: {{env "NOMAD_GROUP_NAME"}}
+          __path__: /opt/logs/*
+          __path_exclude__: /opt/logs/.*.fifo

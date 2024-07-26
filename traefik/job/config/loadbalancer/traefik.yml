@@ -1,0 +1,75 @@
+---
+ping:
+  entryPoint: https
+api:
+  dashboard: true
+log:
+  level: INFO
+  format: json
+accessLog: {}
+metrics:
+  prometheus:
+    entryPoint: metrics
+    addEntryPointsLabels: true
+    addRoutersLabels: true
+    addServicesLabels: true
+providers:
+  consul:
+    endpoints: ["consul.service.consul:8501"]
+    rootKey: traefik
+    token: '{{with secret "kv_hs/hashistack/consul/integration_tokens/traefik_access"}}{{.Data.data.token}}{{end}}'
+    tls:
+      ca: /secrets/ednz_ca.pem
+  consulcatalog:
+    watch: true
+    connectAware: true
+    connectByDefault: true
+    exposedByDefault: false
+    endpoint:
+      scheme: https
+      address: "consul.service.consul:8501"
+      token: '{{with secret "kv_hs/hashistack/consul/integration_tokens/traefik_access"}}{{.Data.data.token}}{{end}}'
+      tls:
+        ca: /secrets/ednz_ca.pem
+  nomad:
+    endpoint:
+      address: "https://nomad.service.consul:4646"
+      token: '{{with secret "kv_hs/hashistack/nomad/integration_tokens/traefik_access"}}{{.Data.data.token}}{{end}}'
+      tls:
+        ca: /secrets/ednz_ca.pem
+certificatesResolvers:
+  cloudflare:
+    acme:
+      email: '{{with secret "kv_hs/hashistack/nomad/services/traefik"}}{{.Data.data.cloudflare_email}}{{end}}'
+      storage: /certificates/acme.json
+      dnschallenge:
+        provider: cloudflare
+        resolvers: ["1.1.1.1:53", "1.0.0.1:53"]
+entryPoints:
+  http:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: https
+          scheme: https
+      middlewares: ["secured@consulcatalog"]
+  https:
+    address: ":443"
+    http:
+      middlewares: ["secured@consulcatalog"]
+  metrics:
+    address: ":8082"
+  gitea-ssh:
+    address: ":5022"
+  teamspeak-voice:
+    address: ":9987/udp"
+  teamspeak-file:
+    address: ":30033"
+serversTransport:
+  insecureSkipVerify: true
+experimental:
+  plugins:
+    real-ip:
+      moduleName: "github.com/Paxxs/traefik-get-real-ip"
+      version: "v1.0.3"

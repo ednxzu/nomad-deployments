@@ -1,0 +1,1 @@
+0 3 * * * PATH=$PATH:/usr/local/bin sleep $(shuf -i 0-3600 -n 1) && /usr/local/bin/borgmatic --stats -v 0 2>&1

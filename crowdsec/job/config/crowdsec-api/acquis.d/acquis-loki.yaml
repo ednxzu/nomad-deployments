@@ -1,0 +1,9 @@
+---
+source: loki
+log_level: info
+url: http://localhost:3101/
+limit: 1000
+query: |
+  {job="traefik", filename="/opt/logs/loadbalancer.stdout.0"}
+labels:
+  type: traefik

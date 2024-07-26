@@ -1,0 +1,91 @@
+theme: dark
+jwt_secret: '{{with secret "kv_hs/hashistack/nomad/services/authelia"}}{{.Data.data.jwt_secret}}{{end}}'
+default_redirection_url: https://ednz.fr/
+
+server:
+  host: 0.0.0.0
+  port: 9091
+  path: ""
+  buffers:
+    read: 4096
+    write: 4096
+  enable_pprof: false
+  enable_expvars: false
+  disable_healthcheck: false
+  tls:
+    key: ""
+    certificate: ""
+
+log:
+  level: info
+
+totp:
+  issuer: ednz.fr
+  period: 30
+  skew: 1
+
+authentication_backend:
+  refresh_interval: 1m
+  ldap:
+    implementation: custom
+    url: ldap://localhost:3890
+    timeout: 5s
+    start_tls: false
+    base_dn: dc=ednz,dc=fr
+    username_attribute: uid
+    additional_users_dn: ou=people
+    users_filter: (&({username_attribute}={input})(objectClass=person))
+    additional_groups_dn: ou=groups
+    groups_filter: (member={dn})
+    group_name_attribute: cn
+    mail_attribute: mail
+    display_name_attribute: displayName
+    user: cn=reporter,ou=people,dc=ednz,dc=fr
+    password: '{{with secret "kv_hs/hashistack/nomad/services/authelia"}}{{.Data.data.ldap_reporter_pw}}{{end}}'
+
+session:
+  name: authelia_session
+  domain: ednz.fr
+  same_site: lax
+  secret: '{{with secret "kv_hs/hashistack/nomad/services/authelia"}}{{.Data.data.session_secret}}{{end}}'
+  expiration: 8h
+  inactivity: 5m
+  remember_me_duration: 2M
+  redis:
+    host: localhost
+    port: 6379
+    password: '{{with secret "kv_hs/hashistack/nomad/services/authelia"}}{{.Data.data.redis_pw}}{{end}}'
+    database_index: 0
+    maximum_active_connections: 10
+    minimum_idle_connections: 0
+
+regulation:
+  max_retries: 3
+  find_time: 5m
+  ban_time: 4h
+
+storage:
+  encryption_key: '{{with secret "kv_hs/hashistack/nomad/services/authelia"}}{{.Data.data.storage_encryption_key}}{{end}}'
+  mysql:
+    host: localhost
+    port: 3306
+    database: authelia
+    username: authelia
+    password: '{{with secret "kv_hs/hashistack/nomad/services/authelia"}}{{.Data.data.mariadb_pw}}{{end}}'
+
+notifier:
+  disable_startup_check: false
+  smtp:
+    username: no-reply@ednz.fr
+    password: '{{with secret "kv_hs/hashistack/nomad/services/authelia"}}{{.Data.data.notifier_smtp_password}}{{end}}'
+    host: smtp.protonmail.ch
+    port: 587
+    sender: no-reply@ednz.fr
+    identifier: localhost
+    subject: "[Authelia] {title}"
+    startup_check_address: test@authelia.com
+    disable_require_tls: true
+    disable_html_emails: false
+    tls:
+      skip_verify: true
+      minimum_version: TLS1.2

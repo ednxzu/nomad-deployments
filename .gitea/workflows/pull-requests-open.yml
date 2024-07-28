@@ -9,8 +9,11 @@ on:
     branches:
       - main
     paths:
+      - "**/**"
       - "!.gitea/**"
-      - "!_**"
+      - "!_dependencies/**"
+      - "!_templates/**"
+      - "!.github/**"
 
 env:
   IMAGE_NAME: ${{ gitea.repository }}

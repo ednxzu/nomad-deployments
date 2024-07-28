@@ -15,11 +15,13 @@ env:
 jobs:
   deploy:
     name: Deploy nomad jobs
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
 
       - name: Install required packages
         run: |
@@ -63,33 +65,16 @@ jobs:
           echo "nomad_token=$NOMAD_TOKEN" >> $GITHUB_OUTPUT
           echo "consul_token=$CONSUL_TOKEN" >> $GITHUB_OUTPUT
 
-      - name: Tofu init
-        run: tofu init
+      - name: Install python dependencies
+        run: python3 -m pip install -r ${{ gitea.workspace }}/.gitea/scripts/requirements.txt
         shell: bash
-        working-directory: ./terraform/${{ gitea.ref_type == 'branch' && 'devel' || 'production' }}
-        env:
-          CONSUL_HTTP_TOKEN: ${{ steps.tofu-auth.outputs.consul_token }}
+        working-directory: ${{ gitea.workspace }}
 
-      - name: Tofu plan
-        run: tofu plan${{ gitea.ref_type == 'branch' && ' -replace module.nomad_job.nomad_job.this[\"website\"]' || '' }} -out=plan.tfplan
+      - name: Plan all changed stacks
+        run: python3 .gitea/scripts/deploy_stacks.py
         shell: bash
-        working-directory: ./terraform/${{ gitea.ref_type == 'branch' && 'devel' || 'production' }}
+        working-directory: ${{ gitea.workspace }}
         env:
           NOMAD_TOKEN: ${{ steps.tofu-auth.outputs.nomad_token }}
           VAULT_TOKEN: ${{ steps.tofu-auth.outputs.vault_token }}
           CONSUL_HTTP_TOKEN: ${{ steps.tofu-auth.outputs.consul_token }}
-
-      - name: Tofu apply
-        run: tofu apply plan.tfplan
-        shell: bash
-        working-directory: ./terraform/${{ gitea.ref_type == 'branch' && 'devel' || 'production' }}
-        env:
-          NOMAD_TOKEN: ${{ steps.tofu-auth.outputs.nomad_token }}
-          VAULT_TOKEN: ${{ steps.tofu-auth.outputs.vault_token }}
-          CONSUL_HTTP_TOKEN: ${{ steps.tofu-auth.outputs.consul_token }}
-
-      - name: Expire credentials
-        run: |
-          curl --header "X-Vault-Token: $VAULT_TOKEN" --request POST https://vault.ednz.fr/v1/auth/token/revoke-self
-        env:
-          VAULT_TOKEN: ${{ steps.tofu-auth.outputs.vault_token }}

@@ -3,5 +3,18 @@
   "extends": [
     "config:recommended",
     ":dependencyDashboard"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "job\\.nomad\\.hcl$"
+      ],
+      "matchStrings": [
+        "(?<=task\\s\"[^\"]+\"\\s*\\{[^\\}]*driver\\s*=\\s*\"docker\"[^\\}]*config\\s*\\{[^\\}]*image\\s*=\\s*\")[^\"]+:(?<currentValue>[^\"]+)"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "{{#trimMatches \"^(?<depName>[^:]+):\"}}{{{currentValue}}}{{/trimMatches}}"
+    }
   ]
 }

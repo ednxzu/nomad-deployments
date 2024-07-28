@@ -81,4 +81,4 @@ jobs:
         env:
           NOMAD_TOKEN: ${{ steps.tofu-auth.outputs.nomad_token }}
           VAULT_TOKEN: ${{ steps.tofu-auth.outputs.vault_token }}
-          CONSUL_HTTP_TOKEN: ${{ steps.tofu-auth.outputs.consul_token }}
+          # CONSUL_HTTP_TOKEN: ${{ steps.tofu-auth.outputs.consul_token }}

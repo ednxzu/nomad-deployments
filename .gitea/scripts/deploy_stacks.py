@@ -1,6 +1,7 @@
 import os
 import subprocess
 import argparse
+import sys
 from typing import Tuple, List, Set, Dict
 from prettytable import PrettyTable
 import logging
@@ -258,6 +259,9 @@ def main():
                 if log:
                     logger.error(f"{SEPARATOR}")
                     logger.error(f"{stack}:\n{log}")
+
+        if failure_occurred:
+            sys.exit(1)
 
 
 if __name__ == "__main__":

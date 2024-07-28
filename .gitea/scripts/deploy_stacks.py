@@ -14,7 +14,7 @@ SKIPPED_EMOJI = "⏭️"
 SEPARATOR = "-" * 80 + "\n"
 IGNORED_DIRS: Set[str] = {"_dependencies", "_templates", ".github"}
 
-TOFU_PATH = "/usr/bin/tofu"
+TOFU_PATH = "tofu"
 
 SUCCESS_LEVEL_NUM = 25
 SKIPPED_LEVEL_NUM = 23

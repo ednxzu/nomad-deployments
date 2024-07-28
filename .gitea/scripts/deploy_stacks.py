@@ -225,6 +225,8 @@ def main():
                 logger.info(f"{SEPARATOR}")
                 success, log, exit_code = plan_stack(stack)
                 logs[stack] = log
+                if not success:
+                    failure_occurred = True
                 if exit_code == 0:
                     status = SKIPPED_EMOJI
                     logger.info(f"{stack} was skipped due to no changes.")

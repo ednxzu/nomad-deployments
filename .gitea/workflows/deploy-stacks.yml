@@ -4,12 +4,12 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "**/**"
-      - "!.gitea/**"
-      - "!_dependencies/**"
-      - "!_templates/**"
-      - "!.github/**"
+    # paths:
+    #   - "**/**"
+    #   - "!.gitea/**"
+    #   - "!_dependencies/**"
+    #   - "!_templates/**"
+    #   - "!.github/**"
 
 env:
   IMAGE_NAME: ${{ gitea.repository }}

@@ -19,7 +19,6 @@ env:
 jobs:
   plan:
     name: Plan nomad jobs
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

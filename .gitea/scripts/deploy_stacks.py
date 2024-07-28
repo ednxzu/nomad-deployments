@@ -12,7 +12,7 @@ WARN_EMOJI = "❗"
 DEBUG_EMOJI = "🔍"
 SKIPPED_EMOJI = "⏭️"
 SEPARATOR = "-" * 80 + "\n"
-IGNORED_DIRS: Set[str] = {"_dependencies", "_templates", ".github"}
+IGNORED_DIRS: Set[str] = {"_dependencies", "_templates", ".gitea", ".github"}
 
 TOFU_PATH = "tofu"
 

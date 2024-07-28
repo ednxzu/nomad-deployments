@@ -8,16 +8,6 @@ on:
       - synchronize
     branches:
       - main
-    # paths:
-    #   - "**/**"
-    #   - "!.gitea/**"
-    #   - "!_dependencies/**"
-    #   - "!_templates/**"
-    #   - "!.github/**"
-
-env:
-  IMAGE_NAME: ${{ gitea.repository }}
-  BUILD_PLATFORMS: linux/amd64
 
 jobs:
   plan:
@@ -26,14 +16,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: 0
-
-      - name: Fetch main branch
-        run: git fetch origin main:main
-        shell: bash
-        working-directory: ${{ gitea.workspace }}
 
       - name: Install required packages
         run: |

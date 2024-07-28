@@ -66,9 +66,10 @@ jobs:
           echo "nomad_token=$NOMAD_TOKEN" >> $GITHUB_OUTPUT
           echo "consul_token=$CONSUL_TOKEN" >> $GITHUB_OUTPUT
 
-      - name: Check tofu and python3 paths
-        run: which python3 && which tofu
+      - name: Install python dependencies
+        run: python3 -m pip install -r ${{ gitea.workspace }}/.gitea/scripts/requirements.txt
         shell: bash
+        working-directory: ${{ gitea.workspace }}
 
       - name: Plan all changed stacks
         run: python3 .gitea/scripts/deploy_stacks.py --plan-only

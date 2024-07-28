@@ -57,7 +57,7 @@ job "flaresolverr" {
     task "flaresolverr" {
       driver = "docker"
       config {
-        image = "ghcr.io/flaresolverr/flaresolverr:latest"
+        image = "ghcr.io/flaresolverr/flaresolverr:v3.3.21"
       }
       template {
         data        = base64decode(var.flaresolverr_flaresolverr_env)

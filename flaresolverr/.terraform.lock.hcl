@@ -2,7 +2,8 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.opentofu.org/hashicorp/consul" {
-  version = "2.20.0"
+  version     = "2.20.0"
+  constraints = "~> 2.20.0"
   hashes = [
     "h1:sjMCNMTWV3BRnMAuzjkXEkOTKApxZytYf+nb67gal84=",
     "zh:1d5d466334b75ef4b6c77da630c8a6eb6373875b16b059c9a55b73aa1e98cb34",
@@ -36,7 +37,8 @@ provider "registry.opentofu.org/hashicorp/nomad" {
 }
 
 provider "registry.opentofu.org/hashicorp/vault" {
-  version = "3.25.0"
+  version     = "3.25.0"
+  constraints = "~> 3.25.0"
   hashes = [
     "h1:SbKJsSGoOCp0kpoMEi1Sqt6KxchDcqNLMXD9ZwhoIjU=",
     "zh:150cbcd541b33e98309a158b27c35dee04fafb7d4e4d8df4431a4bb27a154b9f",

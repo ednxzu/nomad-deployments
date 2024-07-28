@@ -8,9 +8,9 @@ on:
       - synchronize
     branches:
       - main
-    paths:
-      - "!.gitea/**"
-      - "!_**"
+    # paths:
+    #   - "!.gitea/**"
+    #   - "!_**"
 
 env:
   IMAGE_NAME: ${{ gitea.repository }}

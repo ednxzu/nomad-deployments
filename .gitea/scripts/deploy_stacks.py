@@ -13,7 +13,7 @@ WARN_EMOJI = "❗"
 DEBUG_EMOJI = "🔍"
 SKIPPED_EMOJI = "⏭️"
 SEPARATOR = "-" * 80 + "\n"
-IGNORED_DIRS: Set[str] = {"_dependencies", "_templates", ".gitea", ".github"}
+IGNORED_DIRS: Set[str] = {"_dependencies", "_templates", ".gitea", ".github", ".git"}
 
 TOFU_PATH = "tofu"
 
@@ -160,39 +160,26 @@ def apply_stack(stack_dir: str) -> Tuple[bool, str, str]:
         return False, log, ERROR_EMOJI
 
 
-def detect_changed_stacks() -> Set[str]:
-    """Detect changes in the root-level directories.
+def detect_all_stacks() -> Set[str]:
+    """Detect all stack directories.
 
     Returns:
-        Set[str]: A set of changed stack directories.
+        Set[str]: A set of all stack directories.
     """
-    merge_base_result = subprocess.run(
-        ["git", "merge-base", "HEAD", "origin/main"], capture_output=True, text=True
-    )
-    merge_base = merge_base_result.stdout.strip()
+    all_stacks: Set[str] = set()
+    for item in os.listdir("."):
+        if os.path.isdir(item) and item not in IGNORED_DIRS:
+            all_stacks.add(item)
 
-    result = subprocess.run(
-        ["git", "diff", "--name-only", merge_base, "HEAD"],
-        capture_output=True,
-        text=True,
-    )
-    changed_files: List[str] = result.stdout.splitlines()
-
-    changed_stacks: Set[str] = set()
-    for file in changed_files:
-        stack = file.split("/")[0]
-        if stack not in IGNORED_DIRS and stack != "" and os.path.isdir(stack):
-            changed_stacks.add(stack)
-
-    if changed_stacks:
+    if all_stacks:
         table = PrettyTable()
-        table.field_names = ["Changed Stacks"]
-        for stack in changed_stacks:
+        table.field_names = ["Stacks"]
+        for stack in all_stacks:
             table.add_row([stack])
-        logger.info("The following stacks have changed:")
+        logger.info("The following stacks will be processed:")
         logger.info(f"\n{table}\n")
 
-    return changed_stacks
+    return all_stacks
 
 
 def main():
@@ -204,16 +191,16 @@ def main():
     )
     args = parser.parse_args()
 
-    changed_stacks: Set[str] = detect_changed_stacks()
+    all_stacks: Set[str] = detect_all_stacks()
 
-    if not changed_stacks:
-        logger.info("No changes detected in root-level directories.")
+    if not all_stacks:
+        logger.info("No stack directories found.")
     else:
         results: List[Tuple[str, str]] = []
         logs: Dict[str, str] = {}
         failure_occurred = False
 
-        for stack in changed_stacks:
+        for stack in all_stacks:
             if failure_occurred:
                 results.append((stack, SKIPPED_EMOJI))
                 logger.warning(f"Skipping {stack} due to previous failure.")

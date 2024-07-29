@@ -28,8 +28,8 @@ jobs:
       - name: Install OpenTofu
         run: |
           curl --proto '=https' --tlsv1.2 -fsSL https://get.opentofu.org/install-opentofu.sh -o install-opentofu.sh
-          chmod +x install-opentofu.sh --opentofu-version $OPENTOFU_VERSION
-          ./install-opentofu.sh --install-method standalone
+          chmod +x install-opentofu.sh
+          ./install-opentofu.sh --install-method standalone --opentofu-version $OPENTOFU_VERSION
           rm -f install-opentofu.sh
         shell: bash
         working-directory: ${{ gitea.workspace }}

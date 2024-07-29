@@ -66,6 +66,10 @@ jobs:
         shell: bash
         working-directory: ${{ gitea.workspace }}
 
+      - name: Verify OpenTofu version
+        run: |
+          tofu --version
+
       - name: Install python dependencies
         run: |
           tofu init

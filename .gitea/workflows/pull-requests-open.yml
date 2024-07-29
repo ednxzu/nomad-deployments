@@ -71,6 +71,7 @@ jobs:
           tofu --version
 
       - name: Install python dependencies
+        id: plan
         run: |
           tofu init
           tofu plan -detailed-exitcode -compact-warnings -out plan.out
@@ -81,6 +82,10 @@ jobs:
           NOMAD_TOKEN: ${{ steps.tofu-auth.outputs.nomad_token }}
           VAULT_TOKEN: ${{ steps.tofu-auth.outputs.vault_token }}
           CONSUL_HTTP_TOKEN: ${{ steps.tofu-auth.outputs.consul_token }}
+
+      - run: echo ${{ steps.plan.outputs.stdout }}
+      - run: echo ${{ steps.plan.outputs.stderr }}
+      - run: echo ${{ steps.plan.outputs.exitcode }}
 
       - name: Plan all changed stacks
         run: python3 .gitea/scripts/deploy_stacks.py --plan-only

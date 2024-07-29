@@ -32,7 +32,7 @@ jobs:
       - name: Install OpenTofu
         uses: opentofu/setup-opentofu@v1
         with:
-          tofu_version: 1.6.2
+          tofu_version: 1.7.3
 
       - name: Get secrets from vault
         id: import-secrets

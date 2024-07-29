@@ -72,6 +72,10 @@ jobs:
           tofu plan -detailed-exitcode -compact-warnings -out plan.out
         shell: bash
         working-directory: ${{ gitea.workspace }}/bazarr
+        env:
+          NOMAD_TOKEN: ${{ steps.tofu-auth.outputs.nomad_token }}
+          VAULT_TOKEN: ${{ steps.tofu-auth.outputs.vault_token }}
+          CONSUL_HTTP_TOKEN: ${{ steps.tofu-auth.outputs.consul_token }}
 
       - name: Plan all changed stacks
         run: python3 .gitea/scripts/deploy_stacks.py --plan-only

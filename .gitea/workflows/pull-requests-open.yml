@@ -32,11 +32,13 @@ jobs:
       - name: Install OpenTofu
         run: |
           curl --proto '=https' --tlsv1.2 -fsSL https://get.opentofu.org/install-opentofu.sh -o install-opentofu.sh
-          chmod +x install-opentofu.sh
+          chmod +x install-opentofu.sh --opentofu-version $OPENTOFU_VERSION
           ./install-opentofu.sh --install-method standalone
           rm -f install-opentofu.sh
         shell: bash
         working-directory: ${{ gitea.workspace }}
+        env:
+          OPENTOFU_VERSION: 1.8.0
 
       - name: Get secrets from vault
         id: import-secrets
@@ -69,10 +71,6 @@ jobs:
         run: python3 -m pip install -r ${{ gitea.workspace }}/.gitea/scripts/requirements.txt
         shell: bash
         working-directory: ${{ gitea.workspace }}
-
-      - name: Verify OpenTofu version
-        run: |
-          tofu --version
 
       - name: Plan all changed stacks
         run: python3 .gitea/scripts/deploy_stacks.py --plan-only

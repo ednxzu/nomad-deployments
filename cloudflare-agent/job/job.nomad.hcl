@@ -38,7 +38,7 @@ job "cloudflare-agent" {
     task "cloudflare-agent" {
       driver = "docker"
       config {
-        image = "favonia/cloudflare-ddns:latest"
+        image = "favonia/cloudflare-ddns:latest@sha256:03133f7889a9945d58beb1cfe82e1a9e17ba3e2e5ce4fdd3a81e0fdd213e3f11"
       }
       template {
         data        = base64decode(var.cloudflare_agent_cloudflare_agent_env)
@@ -58,7 +58,7 @@ job "cloudflare-agent" {
       }
       driver = "docker"
       config {
-        image = "grafana/promtail:latest"
+        image = "grafana/promtail:latest@sha256:1f471ceccc87375fbe9d6593a3ebff247f492985270770076d6ef9728cfcc6a8"
         args = [
           "-config.file=/etc/promtail/promtail.yml"
         ]

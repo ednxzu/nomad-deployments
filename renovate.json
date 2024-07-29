@@ -11,7 +11,7 @@
         "job\\.nomad\\.hcl$"
       ],
       "matchStrings": [
-        "task\\s+\"[^\"]+\"\\s*\\{[^\\}]*driver\\s*=\\s*\"docker\"[^\\}]*config\\s*\\{[^\\}]*image\\s*=\\s*\"(?<depName>[^\"]+):(?<currentValue>[^\"]+)\""
+        "task\\s+\"[^\"]+\"\\s*\\{[^\\}]*driver\\s*=\\s*\"docker\"[^\\}]*config\\s*\\{[^\\}]*image\\s*=\\s*\"(?<depName>[^\"]+)([:@])(?<currentValue>[^\"]+)\""
       ],
       "datasourceTemplate": "docker"
     }

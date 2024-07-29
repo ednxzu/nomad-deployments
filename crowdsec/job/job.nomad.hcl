@@ -70,7 +70,7 @@ job "crowdsec" {
     task "crowdsec-api" {
       driver = "docker"
       config {
-        image = "crowdsecurity/crowdsec:latest"
+        image = "crowdsecurity/crowdsec:v1.6.0"
         mount {
           type   = "bind"
           source = "local/acquis-loki.yaml"
@@ -113,7 +113,7 @@ job "crowdsec" {
     task "crowdsec-bouncer-traefik" {
       driver = "docker"
       config {
-        image = "fbonalair/traefik-crowdsec-bouncer:latest"
+        image = "fbonalair/traefik-crowdsec-bouncer:0.5"
       }
       template {
         data        = base64decode(var.crowdsec_bouncer_traefik_crowdsec_bouncer_traefik_env)
@@ -133,7 +133,7 @@ job "crowdsec" {
       }
       driver = "docker"
       config {
-        image = "grafana/promtail:latest"
+        image = "grafana/promtail:latest@sha256:1f471ceccc87375fbe9d6593a3ebff247f492985270770076d6ef9728cfcc6a8"
         args = [
           "-config.file=/etc/promtail/promtail.yml"
         ]
@@ -166,7 +166,7 @@ job "crowdsec" {
       }
       driver = "docker"
       config {
-        image = "ghcr.io/borgmatic-collective/borgmatic:latest"
+        image = "ghcr.io/borgmatic-collective/borgmatic:1.8.13"
         mount {
           type     = "bind"
           source   = "local/config.yaml"

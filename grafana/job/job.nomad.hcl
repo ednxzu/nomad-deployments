@@ -97,7 +97,7 @@ job "grafana" {
       }
       driver = "docker"
       config {
-        image = "grafana/promtail:latest"
+        image = "grafana/promtail:latest@sha256:1f471ceccc87375fbe9d6593a3ebff247f492985270770076d6ef9728cfcc6a8"
         args = [
           "-config.file=/etc/promtail/promtail.yml"
         ]
@@ -131,7 +131,7 @@ job "grafana" {
       }
       driver = "docker"
       config {
-        image = "ghcr.io/borgmatic-collective/borgmatic:latest"
+        image = "ghcr.io/borgmatic-collective/borgmatic:1.8.13"
         mount {
           type     = "bind"
           source   = "local/config.yaml"

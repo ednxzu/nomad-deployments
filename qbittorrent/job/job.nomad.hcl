@@ -70,7 +70,7 @@ job "qbittorrent" {
         sidecar = true
       }
       config {
-        image = "lscr.io/linuxserver/wireguard:latest"
+        image = "linuxserver/wireguard:latest@sha256:0a12ade8964dd8ab10fa2f380537d37ce6e706d8e909dec2a77e83ce37d89b99"
         ports = ["qbt-tcp-udp"]
         cap_add = [
           "NET_ADMIN"
@@ -102,7 +102,7 @@ job "qbittorrent" {
     task "qbittorrent" {
       driver = "docker"
       config {
-        image        = "lscr.io/linuxserver/qbittorrent:latest"
+        image        = "linuxserver/qbittorrent:4.6.5"
         network_mode = "container:wireguard-${NOMAD_ALLOC_ID}"
         cap_add = [
           "NET_ADMIN"
@@ -139,7 +139,7 @@ job "qbittorrent" {
       }
       driver = "docker"
       config {
-        image = "grafana/promtail:latest"
+        image = "grafana/promtail:latest@sha256:1f471ceccc87375fbe9d6593a3ebff247f492985270770076d6ef9728cfcc6a8"
         args = [
           "-config.file=/etc/promtail/promtail.yml"
         ]
@@ -178,7 +178,7 @@ job "qbittorrent" {
       }
       driver = "docker"
       config {
-        image = "ghcr.io/borgmatic-collective/borgmatic:latest"
+        image = "ghcr.io/borgmatic-collective/borgmatic:1.8.13"
         mount {
           type     = "bind"
           source   = "local/config.yaml"

@@ -73,7 +73,7 @@ job "bazarr" {
     task "bazarr" {
       driver = "docker"
       config {
-        image = "linuxserver/bazarr:latest"
+        image = "linuxserver/bazarr:latest@sha256:25f0d19ba9226fdf15aec0fc7fa134ba89fc6f77f09d7bd45b33c5960c47821e"
       }
       template {
         data        = base64decode(var.bazarr_bazarr_env)
@@ -105,7 +105,7 @@ job "bazarr" {
       }
       driver = "docker"
       config {
-        image = "grafana/promtail:latest"
+        image = "grafana/promtail:latest@sha256:1f471ceccc87375fbe9d6593a3ebff247f492985270770076d6ef9728cfcc6a8"
         args = [
           "-config.file=/etc/promtail/promtail.yml"
         ]
@@ -139,7 +139,7 @@ job "bazarr" {
       }
       driver = "docker"
       config {
-        image = "ghcr.io/borgmatic-collective/borgmatic:latest"
+        image = "ghcr.io/borgmatic-collective/borgmatic:1.8.13"
         mount {
           type     = "bind"
           source   = "local/config.yaml"

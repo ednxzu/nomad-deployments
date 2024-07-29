@@ -55,7 +55,7 @@ job "metrics" {
     task "prometheus" {
       driver = "docker"
       config {
-        image = "prom/prometheus:latest"
+        image = "prom/prometheus:v2.53.1"
         args = [
           "--config.file=/secrets/prometheus.yml",
           "--storage.tsdb.path=/prometheus",
@@ -86,7 +86,7 @@ job "metrics" {
     task "loki" {
       driver = "docker"
       config {
-        image = "grafana/loki:latest"
+        image = "grafana/loki:latest@sha256:22caa5cdd21d227145acf3cca49db63898152ba470744e2b6962eed7c3469f9e"
         args = [
           "-config.file=/etc/loki/loki.yml"
         ]

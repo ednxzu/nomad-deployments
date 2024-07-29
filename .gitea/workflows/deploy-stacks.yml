@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install required packages
         run: |
@@ -60,7 +62,7 @@ jobs:
         shell: bash
         working-directory: ${{ gitea.workspace }}
 
-      - name: Plan all changed stacks
+      - name: Deploy all changed stacks
         run: python3 .gitea/scripts/deploy_stacks.py
         shell: bash
         working-directory: ${{ gitea.workspace }}

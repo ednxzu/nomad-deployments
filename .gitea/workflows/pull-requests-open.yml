@@ -66,6 +66,13 @@ jobs:
         shell: bash
         working-directory: ${{ gitea.workspace }}
 
+      - name: Install python dependencies
+        run: |
+          tofu init
+          tofu plan -detailed-exitcode -compact-warnings -out plan.out
+        shell: bash
+        working-directory: ${{ gitea.workspace }}/bazarr
+
       - name: Plan all changed stacks
         run: python3 .gitea/scripts/deploy_stacks.py --plan-only
         shell: bash

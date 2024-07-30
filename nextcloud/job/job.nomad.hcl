@@ -135,7 +135,7 @@ job "nextcloud" {
       }
       driver = "docker"
       config {
-        image = "linuxserver/mariadb:latest"
+        image = "linuxserver/mariadb:10.11.8"
       }
       template {
         data        = base64decode(var.mariadb_mariadb_env)
@@ -159,7 +159,7 @@ job "nextcloud" {
       }
       driver = "docker"
       config {
-        image = "redis:alpine"
+        image = "redis:7.2"
         args = [
           "--requirepass $${REDIS_PASSWORD}",
         ]
@@ -186,7 +186,7 @@ job "nextcloud" {
       }
       driver = "docker"
       config {
-        image = "grafana/promtail:latest"
+        image = "grafana/promtail:latest@sha256:1f471ceccc87375fbe9d6593a3ebff247f492985270770076d6ef9728cfcc6a8"
         args = [
           "-config.file=/etc/promtail/promtail.yml"
         ]
@@ -220,7 +220,7 @@ job "nextcloud" {
       }
       driver = "docker"
       config {
-        image = "ghcr.io/borgmatic-collective/borgmatic:latest"
+        image = "ghcr.io/borgmatic-collective/borgmatic:1.8.13"
         mount {
           type     = "bind"
           source   = "local/config.yaml"

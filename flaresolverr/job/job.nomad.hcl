@@ -57,7 +57,7 @@ job "flaresolverr" {
     task "flaresolverr" {
       driver = "docker"
       config {
-        image = "ghcr.io/flaresolverr/flaresolverr:v3.3.21"
+        image = "ghcr.io/flaresolverr/flaresolverr:v3.3.20"
       }
       template {
         data        = base64decode(var.flaresolverr_flaresolverr_env)
@@ -77,7 +77,7 @@ job "flaresolverr" {
       }
       driver = "docker"
       config {
-        image = "grafana/promtail:latest"
+        image = "grafana/promtail:latest@sha256:1f471ceccc87375fbe9d6593a3ebff247f492985270770076d6ef9728cfcc6a8"
         args = [
           "-config.file=/etc/promtail/promtail.yml"
         ]

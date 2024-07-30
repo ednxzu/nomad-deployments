@@ -48,7 +48,7 @@ job "teamspeak" {
     task "teamspeak" {
       driver = "docker"
       config {
-        image = "ich777/teamspeak:latest"
+        image = "ich777/teamspeak:latest@sha256:7c5422e8f973a1411e7b97fa450970367d25639deceafcc5c1701bb1160ee23c"
         ports = ["teamspeak-admin"]
       }
       template {
@@ -73,7 +73,7 @@ job "teamspeak" {
       }
       driver = "docker"
       config {
-        image = "ghcr.io/borgmatic-collective/borgmatic:latest"
+        image = "ghcr.io/borgmatic-collective/borgmatic:1.8.13"
         mount {
           type     = "bind"
           source   = "local/config.yaml"

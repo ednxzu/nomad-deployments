@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install required packages
         run: |
@@ -24,9 +26,15 @@ jobs:
           update-ca-certificates
 
       - name: Install OpenTofu
-        uses: opentofu/setup-opentofu@v1
-        with:
-          tofu_version: 1.6.2
+        run: |
+          curl --proto '=https' --tlsv1.2 -fsSL https://get.opentofu.org/install-opentofu.sh -o install-opentofu.sh
+          chmod +x install-opentofu.sh
+          ./install-opentofu.sh --install-method standalone --opentofu-version $OPENTOFU_VERSION
+          rm -f install-opentofu.sh
+        shell: bash
+        working-directory: ${{ gitea.workspace }}
+        env:
+          OPENTOFU_VERSION: 1.8.0
 
       - name: Get secrets from vault
         id: import-secrets
@@ -60,7 +68,7 @@ jobs:
         shell: bash
         working-directory: ${{ gitea.workspace }}
 
-      - name: Plan all changed stacks
+      - name: Deploy all changed stacks
         run: python3 .gitea/scripts/deploy_stacks.py
         shell: bash
         working-directory: ${{ gitea.workspace }}

@@ -15,5 +15,16 @@
       ],
       "datasourceTemplate": "docker"
     }
+  ],
+  "packageRules": [
+    {
+      "description": "Skip automatic deployment for jobs that will disconnect runners from gitea",
+      "matchFileNames": [
+        "gitea/job/job.nomad.hcl",
+        "traefik/job/job.nomad.hcl",
+        "crowdsec/job/job.nomad.hcl"
+      ],
+      "commitMessageSuffix": "[skip-ci]"
+    }
   ]
 }

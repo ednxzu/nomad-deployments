@@ -1,0 +1,22 @@
+---
+repos:
+  # id can either be an exact repo ID or a regex.
+  # If using a regex, it must start and end with a slash.
+  # Repo ID's are of the form {VCS hostname}/{org}/{repo name}, ex.
+  # github.com/runatlantis/atlantis.
+  - id: git.ednz.fr/ednz-cloud/nomad-deployments
+    branch: /.*/
+    workflow: opentofu
+
+workflows:
+  opentofu:
+    plan:
+      steps:
+        - run: rm -rf .terraform
+        - run: tofu init -reconfigure
+        - run: tofu plan
+    apply:
+      steps:
+        - run: rm -rf .terraform
+        - run: tofu init
+        - run: tofu apply -auto-approve

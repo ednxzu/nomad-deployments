@@ -97,7 +97,8 @@ job "atlantis" {
           "--gitea-token=${GITEA_TOKEN}",
           "--gitea-webhook-secret=${GITEA_WEBHOOK_SECRET}",
           "--gitea-page-size=30",
-          "--repo-allowlist=${GITEA_REPO_ALLOWLIST}"
+          "--repo-allowlist=${GITEA_REPO_ALLOWLIST}",
+          "--config=/secrets/config.yaml"
         ]
         mount {
           type   = "bind"
@@ -114,6 +115,10 @@ job "atlantis" {
         data        = base64decode(var.atlantis_atlantis_env)
         destination = "secrets/atlantis.env"
         env         = true
+      }
+      template {
+        data        = base64decode(var.atlantis_config_yaml)
+        destination = "secrets/config.yaml"
       }
       template {
         data        = base64decode(var.atlantis_ednz_ca_pem)
@@ -162,6 +167,10 @@ job "atlantis" {
 }
 
 variable "atlantis_atlantis_env" {
+  type = string
+}
+
+variable "atlantis_config_yaml" {
   type = string
 }
 

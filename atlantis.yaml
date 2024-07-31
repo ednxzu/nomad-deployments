@@ -5,6 +5,7 @@ projects:
     branch: /main/
     dir: ./authentik/
     workspace: default
+    workflow: opentofu
     autoplan:
       when_modified: ["*"]
       enabled: true

@@ -59,6 +59,32 @@ job "atlantis" {
       }
     }
 
+    task "bootstrap" {
+      driver = "docker"
+      lifecycle {
+        hook    = "prestart"
+        sidecar = false
+      }
+      config {
+        image = "alpine:3.20"
+        entrypoint = ["${NOMAD_TASK_DIR}/entrypoint.sh"]
+      }
+      template {
+        data        = base64decode(var.bootstrap_bootstrap_env)
+        destination = "secrets/bootstrap.env"
+        env         = true
+      }
+      template {
+        data        = base64decode(var.bootstrap_entrypoint_sh)
+        destination = "local/entrypoint.sh"
+        perms       = "755"
+      }
+      resources {
+        cpu    = 128
+        memory = 256
+      }
+    }
+
     task "atlantis" {
       driver = "docker"
       config {
@@ -73,6 +99,16 @@ job "atlantis" {
           "--gitea-page-size=30",
           "--repo-allowlist=${GITEA_REPO_ALLOWLIST}"
         ]
+        mount {
+          type   = "bind"
+          source = "local/tofu"
+          target = "/usr/local/bin/tofu"
+        }
+      }
+      template {
+        data        = "${NOMAD_ALLOC_DIR}/data/tofu"
+        destination = "local/tofu"
+        perms       = "755"
       }
       template {
         data        = base64decode(var.atlantis_atlantis_env)
@@ -130,6 +166,14 @@ variable "atlantis_atlantis_env" {
 }
 
 variable "atlantis_ednz_ca_pem" {
+  type = string
+}
+
+variable "bootstrap_bootstrap_env" {
+  type = string
+}
+
+variable "bootstrap_entrypoint_sh" {
   type = string
 }
 

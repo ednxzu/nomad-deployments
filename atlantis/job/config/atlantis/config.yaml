@@ -7,16 +7,17 @@ repos:
   - id: git.ednz.fr/ednz-cloud/nomad-deployments
     branch: /.*/
     workflow: opentofu
+    allowed_overrides: ["pre_workflow_hooks", "post_workflow_hooks"]
 
 workflows:
   opentofu:
     plan:
       steps:
         - run: rm -rf .terraform
-        - run: tofu init -reconfigure
-        - run: tofu plan
+        - run: /usr/local/bin/tofu init -reconfigure
+        - run: /usr/local/bin/tofu plan
     apply:
       steps:
         - run: rm -rf .terraform
-        - run: tofu init
-        - run: tofu apply -auto-approve
+        - run: /usr/local/bin/tofu init
+        - run: /usr/local/bin/tofu apply -auto-approve

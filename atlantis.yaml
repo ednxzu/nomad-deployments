@@ -8,3 +8,12 @@ projects:
     autoplan:
       when_modified: ["*"]
       enabled: true
+    pre_workflow_hooks:
+      - run: |
+          export NOMAD_TOKEN=$(curl --silent --header "X-Vault-Token: $VAULT_TOKEN" https://vault.ednz.fr/v1/nomad/creds/full-access | grep -o '"secret_id":"[^"]*' | sed 's/"secret_id":"//')
+          export CONSUL_HTTP_TOKEN=$(curl --silent --header "X-Vault-Token: $VAULT_TOKEN" https://vault.ednz.fr/v1/consul/creds/admins | grep -o '"token":"[^"]*' | sed 's/"token":"//')
+
+    post_workflow_hooks:
+      - run: |
+          unset NOMAD_TOKEN
+          unset CONSUL_HTTP_TOKEN

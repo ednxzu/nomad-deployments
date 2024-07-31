@@ -1,0 +1,13 @@
+---
+version: 3
+projects:
+  - name: authentik
+    branch: /main/
+    dir: ./authentik/
+    workspace: default
+    autoplan:
+      when_modified: ["*"]
+      enabled: true
+    plan_requirements: [mergeable, approved, undiverged]
+    apply_requirements: [mergeable, approved, undiverged]
+    import_requirements: [mergeable, approved, undiverged]

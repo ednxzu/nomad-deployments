@@ -3,14 +3,119 @@ version: 3
 automerge: true
 delete_source_branch_on_merge: true
 projects:
-  - name: authentik
-    branch: /main/
-    dir: ./authentik/
+  - &template
     workspace: default
     workflow: opentofu
     autoplan:
-      when_modified: ["*"]
       enabled: true
+      when_modified: ["*"]
+
+  - <<: *template
+    name: authelia
+    dir: ./authelia/
+
+  - <<: *template
+    name: authentik
+    dir: ./authentik/
+
+  - <<: *template
+    name: bazarr
+    dir: ./bazarr/
+
+  - <<: *template
+    name: ceph-csi
+    dir: ./ceph-csi/
+
+  - <<: *template
+    name: cloudflare-agent
+    dir: ./cloudflare-agent/
+
+  - <<: *template
+    name: cloudflare-agent-cpl
+    dir: ./cloudflare-agent-cpl/
+
+  - <<: *template
+    name: crowdsec
+    dir: ./crowdsec/
+    silence_pr_comments: [apply]
+
+  - <<: *template
+    name: flaresolverr
+    dir: ./flaresolverr/
+
+  - <<: *template
+    name: gitea
+    dir: ./gitea/
+    silence_pr_comments: [apply]
+
+  - <<: *template
+    name: grafana
+    dir: ./grafana/
+
+  - <<: *template
+    name: hashistack-backup
+    dir: ./hashistack-backup/
+
+  - <<: *template
+    name: housekeeping-agent
+    dir: ./housekeeping-agent/
+
+  - <<: *template
+    name: lldap
+    dir: ./lldap/
+
+  - <<: *template
+    name: metrics
+    dir: ./metrics/
+
+  - <<: *template
+    name: nextcloud
+    dir: ./nextcloud/
+
+  - <<: *template
+    name: nfs-csi
+    dir: ./nfs-csi/
+
+  - <<: *template
+    name: overseerr
+    dir: ./overseerr/
+
+  - <<: *template
+    name: prowlarr
+    dir: ./prowlarr/
+
+  - <<: *template
+    name: qbittorrent
+    dir: ./qbittorrent/
+
+  - <<: *template
+    name: radarr
+    dir: ./radarr/
+
+  - <<: *template
+    name: resume
+    dir: ./resume/
+
+  - <<: *template
+    name: sonarr
+    dir: ./sonarr/
+
+  - <<: *template
+    name: tautulli
+    dir: ./tautulli/
+
+  - <<: *template
+    name: teamspeak
+    dir: ./teamspeak/
+
+  - <<: *template
+    name: traefik
+    dir: ./traefik/
+    silence_pr_comments: [apply]
+
+  - <<: *template
+    name: vaultwarden
+    dir: ./vaultwarden/
 
 workflows:
   opentofu:

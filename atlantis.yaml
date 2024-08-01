@@ -4,6 +4,8 @@ automerge: true
 delete_source_branch_on_merge: true
 projects:
   - &template
+    name: placeholder
+    dir: placeholder
     workspace: default
     workflow: opentofu
     autoplan:

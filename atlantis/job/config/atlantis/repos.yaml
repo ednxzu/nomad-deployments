@@ -5,4 +5,5 @@ repos:
   # Repo ID's are of the form {VCS hostname}/{org}/{repo name}, ex.
   # github.com/runatlantis/atlantis.
   - id: git.ednz.fr/ednz-cloud/nomad-deployments
+    allowed_overrides: [workflow]
     allow_custom_workflows: true

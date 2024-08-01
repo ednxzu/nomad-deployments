@@ -12,7 +12,7 @@ projects:
 
 workflows:
   opentofu:
-    init:
+    plan:
       steps:
         - env:
             name: NOMAD_TOKEN
@@ -24,11 +24,17 @@ workflows:
               curl --silent --header "X-Vault-Token: $VAULT_TOKEN" https://vault.ednz.fr/v1/consul/creds/admins | grep -o '"token":"[^"]*' | sed 's/"token":"//'
         - run: rm -rf .terraform
         - run: /alloc/data/tofu init -reconfigure
-    plan:
-      steps:
-        - init
         - run: /alloc/data/tofu plan
     apply:
       steps:
-        - init
+        - env:
+            name: NOMAD_TOKEN
+            command: |
+              curl --silent --header "X-Vault-Token: $VAULT_TOKEN" https://vault.ednz.fr/v1/nomad/creds/full-access | grep -o '"secret_id":"[^"]*' | sed 's/"secret_id":"//'
+        - env:
+            name: CONSUL_HTTP_TOKEN
+            command: |
+              curl --silent --header "X-Vault-Token: $VAULT_TOKEN" https://vault.ednz.fr/v1/consul/creds/admins | grep -o '"token":"[^"]*' | sed 's/"token":"//'
+        - run: rm -rf .terraform
+        - run: /alloc/data/tofu init -reconfigure
         - run: /alloc/data/tofu apply -auto-approve

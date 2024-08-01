@@ -98,18 +98,8 @@ job "atlantis" {
           "--gitea-webhook-secret=${GITEA_WEBHOOK_SECRET}",
           "--gitea-page-size=30",
           "--repo-allowlist=${GITEA_REPO_ALLOWLIST}",
-          "--config=/secrets/config.yaml"
+          "--repo-config=/secrets/repos.yaml"
         ]
-        mount {
-          type   = "bind"
-          source = "local/tofu"
-          target = "/usr/local/bin/tofu"
-        }
-      }
-      template {
-        data        = "${NOMAD_ALLOC_DIR}/data/tofu"
-        destination = "local/tofu"
-        perms       = "755"
       }
       template {
         data        = base64decode(var.atlantis_atlantis_env)
@@ -117,8 +107,8 @@ job "atlantis" {
         env         = true
       }
       template {
-        data        = base64decode(var.atlantis_config_yaml)
-        destination = "secrets/config.yaml"
+        data        = base64decode(var.atlantis_repos_yaml)
+        destination = "secrets/repos.yaml"
       }
       template {
         data        = base64decode(var.atlantis_ednz_ca_pem)
@@ -170,7 +160,7 @@ variable "atlantis_atlantis_env" {
   type = string
 }
 
-variable "atlantis_config_yaml" {
+variable "atlantis_repos_yaml" {
   type = string
 }
 

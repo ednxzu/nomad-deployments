@@ -5,6 +5,30 @@ projects:
     branch: /main/
     dir: ./authentik/
     workspace: default
+    workflow: opentofu
     autoplan:
       when_modified: ["*"]
       enabled: true
+
+workflows:
+  opentofu:
+    init:
+      steps:
+        - env:
+            name: NOMAD_TOKEN
+            command: |
+              curl --silent --header "X-Vault-Token: $VAULT_TOKEN" https://vault.ednz.fr/v1/nomad/creds/full-access | grep -o '"secret_id":"[^"]*' | sed 's/"secret_id":"//'
+        - env:
+            name: CONSUL_HTTP_TOKEN
+            command: |
+              curl --silent --header "X-Vault-Token: $VAULT_TOKEN" https://vault.ednz.fr/v1/consul/creds/admins | grep -o '"token":"[^"]*' | sed 's/"token":"//'
+        - run: rm -rf .terraform
+        - run: /alloc/data/tofu init -reconfigure
+    plan:
+      steps:
+        - init
+        - run: /alloc/data/tofu plan
+    apply:
+      steps:
+        - init
+        - run: /alloc/data/tofu apply -auto-approve

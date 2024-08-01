@@ -1,4 +1,6 @@
 ---
+core:
+  defaultRuleSyntax: v2
 ping:
   entryPoint: https
 api:

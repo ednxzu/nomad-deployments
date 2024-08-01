@@ -287,9 +287,9 @@ job "gitea" {
       task = "gitea"
       tags = [
         "traefik.enable=true",
-        "traefik.tcp.routers.gitea-ssh.entrypoints= gitea-ssh",
+        "traefik.tcp.routers.gitea-ssh.entrypoints=gitea-ssh",
         "traefik.tcp.routers.gitea-ssh.rule=HostSNI(`*`)",
-        "traefik.tcp.routers.gitea-ssh.tls.passthrough=true",
+        "traefik.tcp.routers.gitea-ssh.priority=100",
         "traefik.tcp.routers.gitea-ssh.service=gitea-ssh",
         "traefik.tcp.routers.gitea-ssh.tls=false",
         "traefik.tcp.services.gitea-ssh.loadbalancer.server.port=${NOMAD_HOST_PORT_gitea_ssh}"

@@ -1,4 +1,5 @@
 locals {
+  stack_name = basename(path.cwd)
   jobs = {
     grafana = "${path.module}/job/job.nomad.hcl"
   }

@@ -4,7 +4,7 @@ terraform {
   backend "consul" {
     address = "consul.service.consul:8501"
     scheme  = "https"
-    path    = "terraform/ednz-cloud/nomad-deployments/atlantis/terraform.tfstate"
+    path    = "terraform/ednz-cloud/nomad-deployments/${local.stack_name}/terraform.tfstate"
   }
 
   required_providers {

@@ -1,4 +1,5 @@
 locals {
+  stack_name = basename(path.cwd)
   jobs = {
     prowlarr = "${path.module}/job/job.nomad.hcl"
   }

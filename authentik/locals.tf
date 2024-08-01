@@ -1,20 +1,21 @@
 locals {
+  stack_name = basename(path.cwd)
   jobs = {
     authentik = "${path.module}/job/job.nomad.hcl"
   }
 
   jobs_variables = {
     authentik = {
-      authentik_server_env          = base64encode(file("./job/config/authentik/server.env"))
-      authentik_worker_client_env   = base64encode(file("./job/config/authentik/client.env"))
-      redis_redis_env               = base64encode(file("./job/config/redis/redis.env"))
-      postgres_postgres_env         = base64encode(file("./job/config/postgres/postgres.env"))
-      logging_sidecar_promtail_yml  = base64encode(file("./../_templates/logging-sidecar/promtail.yml"))
-      borg_sidecar_borg_sidecar_env = base64encode(file("./job/config/borg-sidecar/borg-sidecar.env"))
-      borg_sidecar_config_yaml      = base64encode(file("./job/config/borg-sidecar/config.yaml"))
-      borg_sidecar_crontab_txt      = base64encode(file("./../_templates/borg-sidecar/crontab.txt"))
-      borg_sidecar_id_borg          = base64encode(file("./../_templates/borg-sidecar/id_borg"))
-      borg_sidecar_known_hosts      = base64encode(file("./../_templates/borg-sidecar/known_hosts"))
+      authentik_server_env          = base64encode(file("${path.module}/job/config/authentik/server.env"))
+      authentik_worker_client_env   = base64encode(file("${path.module}/job/config/authentik/client.env"))
+      redis_redis_env               = base64encode(file("${path.module}/job/config/redis/redis.env"))
+      postgres_postgres_env         = base64encode(file("${path.module}/job/config/postgres/postgres.env"))
+      logging_sidecar_promtail_yml  = base64encode(file("${path.module}/../_templates/logging-sidecar/promtail.yml"))
+      borg_sidecar_borg_sidecar_env = base64encode(file("${path.module}/job/config/borg-sidecar/borg-sidecar.env"))
+      borg_sidecar_config_yaml      = base64encode(file("${path.module}/job/config/borg-sidecar/config.yaml"))
+      borg_sidecar_crontab_txt      = base64encode(file("${path.module}/../_templates/borg-sidecar/crontab.txt"))
+      borg_sidecar_id_borg          = base64encode(file("${path.module}/../_templates/borg-sidecar/id_borg"))
+      borg_sidecar_known_hosts      = base64encode(file("${path.module}/../_templates/borg-sidecar/known_hosts"))
     }
   }
 

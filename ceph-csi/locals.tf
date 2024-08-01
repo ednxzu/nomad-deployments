@@ -1,4 +1,5 @@
 locals {
+  stack_name = basename(path.cwd)
   jobs = {
     ceph-csi-fs-plugin-controller  = "${path.module}/job/ceph-fs/controller.nomad.hcl"
     ceph-csi-fs-plugin-nodes       = "${path.module}/job/ceph-fs/nodes.nomad.hcl"

@@ -11,7 +11,7 @@
         "job\\.nomad\\.hcl$"
       ],
       "matchStrings": [
-        "image\\s*=\\s*\"(?<depName>[^:@\"]+)([:@])(?<currentValue>[^\"]+)\""
+        "image\\s*=\\s*\"?(?<depName>[^\\s:@\"]+)(?::(?<currentValue>[-a-zA-Z0-9.]+))?(?:@(?<currentDigest>sha256:[a-zA-Z0-9]+))?\"?"
       ],
       "datasourceTemplate": "docker"
     }

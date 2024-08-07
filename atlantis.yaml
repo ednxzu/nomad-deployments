@@ -132,7 +132,7 @@ workflows:
             command: |
               curl --silent --header "X-Vault-Token: $VAULT_TOKEN" https://vault.ednz.fr/v1/consul/creds/admins | grep -o '"token":"[^"]*' | sed 's/"token":"//'
         - run: rm -rf .terraform
-        - run: /alloc/data/tofu init -reconfigure
+        - run: /alloc/data/tofu init -upgrade -reconfigure
         - run: /alloc/data/tofu plan
     apply:
       steps:
@@ -145,5 +145,5 @@ workflows:
             command: |
               curl --silent --header "X-Vault-Token: $VAULT_TOKEN" https://vault.ednz.fr/v1/consul/creds/admins | grep -o '"token":"[^"]*' | sed 's/"token":"//'
         - run: rm -rf .terraform
-        - run: /alloc/data/tofu init -reconfigure
+        - run: /alloc/data/tofu init -upgrade -reconfigure
         - run: /alloc/data/tofu apply -auto-approve

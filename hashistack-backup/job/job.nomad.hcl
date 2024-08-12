@@ -94,7 +94,7 @@ job "hashistack-backup" {
       }
       driver = "docker"
       config {
-        image      = "ghcr.io/borgmatic-collective/borgmatic:1.8.13"
+        image      = "ghcr.io/borgmatic-collective/borgmatic:latest"
         entrypoint = ["borgmatic"]
         mount {
           type     = "bind"

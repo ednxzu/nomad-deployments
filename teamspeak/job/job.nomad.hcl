@@ -73,7 +73,7 @@ job "teamspeak" {
       }
       driver = "docker"
       config {
-        image = "ghcr.io/borgmatic-collective/borgmatic:1.8.13"
+        image = "ghcr.io/borgmatic-collective/borgmatic:latest"
         mount {
           type     = "bind"
           source   = "local/config.yaml"

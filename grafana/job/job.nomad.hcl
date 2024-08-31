@@ -73,7 +73,7 @@ job "grafana" {
     task "grafana" {
       driver = "docker"
       config {
-        image = "grafana/grafana-oss:11.1.4"
+        image = "grafana/grafana-oss:11.2.0"
       }
       template {
         data        = base64decode(var.grafana_grafana_env)

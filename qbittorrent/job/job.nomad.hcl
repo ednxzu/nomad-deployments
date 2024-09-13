@@ -70,7 +70,7 @@ job "qbittorrent" {
         sidecar = true
       }
       config {
-        image = "linuxserver/wireguard:latest@sha256:e322c9e07c10c55741e1edc23460adcc06555c40dd72e148d973a82cfe95a130"
+        image = "linuxserver/wireguard:latest@sha256:eb3032c19451a57d169dff5ac11c2086546b127571e8f508bddeec165b9a9b56"
         ports = ["qbt-tcp-udp"]
         cap_add = [
           "NET_ADMIN"

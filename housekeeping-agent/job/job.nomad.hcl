@@ -16,7 +16,7 @@ job "housekeeping-agent" {
     task "housekeeping-agent" {
       driver = "docker"
       config {
-        image      = "docker:latest@sha256:7e8d1849af7a99f145223810933c6cff756f74572f132b7a542936f4cfd7b733"
+        image      = "docker:latest@sha256:db7c4d6d0321c8f674c78a8d1186c8bdfc2f42909d28542a54358a426d34b25c"
         privileged = true
         command    = "docker"
         args       = ["system", "prune", "--all", "--force", "--volumes"]

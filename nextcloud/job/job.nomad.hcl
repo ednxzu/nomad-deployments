@@ -21,13 +21,22 @@ job "nextcloud" {
         "traefik.http.routers.nextcloud.entrypoints=https",
         "traefik.http.routers.nextcloud.tls=true",
         "traefik.http.routers.nextcloud.rule=Host(`drive.ednz.fr`)",
-        "traefik.http.routers.nextcloud.middlewares=nextcloud_redirectregex",
+        "traefik.http.routers.nextcloud.middlewares=nextcloud_redirectregex,nextcloud_headers",
         "traefik.http.routers.nextcloud.tls.certresolver=cloudflare",
         "traefik.http.services.nextcloud.loadbalancer.server.scheme=https",
         "traefik.http.services.nextcloud.loadbalancer.passhostheader=true",
         "traefik.http.middlewares.nextcloud_redirectregex.redirectregex.permanent=true",
         "traefik.http.middlewares.nextcloud_redirectregex.redirectregex.regex='https://(.*)/.well-known/(?:card|cal)dav'",
         "traefik.http.middlewares.nextcloud_redirectregex.redirectregex.replacement='https://$${1}/remote.php/dav'"
+        "traefik.http.middlewares.nextcloud_headers.headers.referrerPolicy=no-referrer",
+        "traefik.http.middlewares.nextcloud_headers.headers.SSLRedirect=true",
+        "traefik.http.middlewares.nextcloud_headers.headers.STSSeconds=315360000",
+        "traefik.http.middlewares.nextcloud_headers.headers.browserXSSFilter=true",
+        "traefik.http.middlewares.nextcloud_headers.headers.contentTypeNosniff=true",
+        "traefik.http.middlewares.nextcloud_headers.headers.forceSTSHeader=true",
+        "traefik.http.middlewares.nextcloud_headers.headers.STSIncludeSubdomains=true",
+        "traefik.http.middlewares.nextcloud_headers.headers.STSPreload=true",
+        "traefik.http.middlewares.nextcloud_headers.headers.customFrameOptionsValue=SAMEORIGIN",
       ]
       connect {
         sidecar_service {

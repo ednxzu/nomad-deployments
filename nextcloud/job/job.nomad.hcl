@@ -27,7 +27,7 @@ job "nextcloud" {
         "traefik.http.services.nextcloud.loadbalancer.passhostheader=true",
         "traefik.http.middlewares.nextcloud_redirectregex.redirectregex.permanent=true",
         "traefik.http.middlewares.nextcloud_redirectregex.redirectregex.regex='https://(.*)/.well-known/(?:card|cal)dav'",
-        "traefik.http.middlewares.nextcloud_redirectregex.redirectregex.replacement='https://$${1}/remote.php/dav'"
+        "traefik.http.middlewares.nextcloud_redirectregex.redirectregex.replacement='https://$${1}/remote.php/dav'",
         "traefik.http.middlewares.nextcloud_headers.headers.referrerPolicy=no-referrer",
         "traefik.http.middlewares.nextcloud_headers.headers.SSLRedirect=true",
         "traefik.http.middlewares.nextcloud_headers.headers.STSSeconds=315360000",

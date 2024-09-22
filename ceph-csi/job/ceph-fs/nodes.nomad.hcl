@@ -21,7 +21,7 @@ job "ceph-csi-fs-plugin-nodes" {
     task "cephfs-node" {
       driver = "docker"
       config {
-        image = "quay.io/cephcsi/cephcsi:v3.10.2"
+        image        = "quay.io/cephcsi/cephcsi:v3.10.2"
         network_mode = "host"
         volumes = [
           "./local/config.json:/etc/ceph-csi-config/config.json",
@@ -46,7 +46,7 @@ job "ceph-csi-fs-plugin-nodes" {
           "--metricsport=${NOMAD_PORT_metrics}"
         ]
         privileged = true
-        ports = ["metrics"]
+        ports      = ["metrics"]
       }
       template {
         data        = base64decode(var.cephfs_node_config_json)

@@ -21,7 +21,7 @@ job "ceph-csi-rbd-plugin-controller" {
     task "ceph-controller" {
       driver = "docker"
       config {
-        image = "quay.io/cephcsi/cephcsi:v3.10.2"
+        image        = "quay.io/cephcsi/cephcsi:v3.10.2"
         network_mode = "host"
         volumes = [
           "./local/config.json:/etc/ceph-csi-config/config.json"
@@ -45,7 +45,7 @@ job "ceph-csi-rbd-plugin-controller" {
           "--metricsport=${NOMAD_PORT_metrics}"
         ]
         privileged = true
-        ports = ["metrics"]
+        ports      = ["metrics"]
       }
       template {
         data        = base64decode(var.ceph_controller_config_json)

@@ -8,7 +8,7 @@ job "nfs-csi-plugin-controller" {
     task "plugin" {
       driver = "docker"
       config {
-        image = "registry.k8s.io/sig-storage/nfsplugin:v4.8.0"
+        image        = "registry.k8s.io/sig-storage/nfsplugin:v4.8.0"
         network_mode = "host"
         args = [
           "--v=5",

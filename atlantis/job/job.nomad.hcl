@@ -28,8 +28,8 @@ job "atlantis" {
         sidecar_service {}
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -51,8 +51,8 @@ job "atlantis" {
         }
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -66,7 +66,7 @@ job "atlantis" {
         sidecar = false
       }
       config {
-        image = "alpine:3.20"
+        image      = "alpine:3.20"
         entrypoint = ["${NOMAD_TASK_DIR}/entrypoint.sh"]
       }
       template {
@@ -88,7 +88,7 @@ job "atlantis" {
     task "atlantis" {
       driver = "docker"
       config {
-        image = "ghcr.io/runatlantis/atlantis:v0.29.0"
+        image   = "ghcr.io/runatlantis/atlantis:v0.29.0"
         command = "server"
         args = [
           "--atlantis-url=${ATLANTIS_URL}",
@@ -148,8 +148,8 @@ job "atlantis" {
         destination = "secrets/promtail.yml"
       }
       resources {
-        cpu    = 100
-        memory = 64
+        cpu        = 100
+        memory     = 64
         memory_max = 128
       }
     }

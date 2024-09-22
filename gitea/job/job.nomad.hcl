@@ -20,8 +20,8 @@ job "gitea" {
         sidecar_service {}
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -36,8 +36,8 @@ job "gitea" {
         sidecar_service {}
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -59,8 +59,8 @@ job "gitea" {
         }
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -138,8 +138,8 @@ job "gitea" {
         destination = "secrets/promtail.yml"
       }
       resources {
-        cpu    = 100
-        memory = 64
+        cpu        = 100
+        memory     = 64
         memory_max = 128
       }
     }
@@ -260,7 +260,7 @@ job "gitea" {
       ]
       connect {
         sidecar_service {
-          proxy{
+          proxy {
             upstreams {
               destination_name = "gitea-redis"
               local_bind_port  = 6379
@@ -273,8 +273,8 @@ job "gitea" {
         }
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -298,8 +298,8 @@ job "gitea" {
         sidecar_service {}
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -321,8 +321,8 @@ job "gitea" {
         }
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -377,8 +377,8 @@ job "gitea" {
         destination = "secrets/promtail.yml"
       }
       resources {
-        cpu    = 100
-        memory = 64
+        cpu        = 100
+        memory     = 64
         memory_max = 128
       }
     }

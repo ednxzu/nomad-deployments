@@ -38,8 +38,8 @@ job "authentik" {
         sidecar_service {}
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -75,8 +75,8 @@ job "authentik" {
         }
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -110,8 +110,8 @@ job "authentik" {
         }
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -177,8 +177,8 @@ job "authentik" {
         destination = "/certs"
       }
       resources {
-        cpu    = 500
-        memory = 512
+        cpu        = 500
+        memory     = 512
         memory_max = 1024
       }
     }
@@ -262,8 +262,8 @@ job "authentik" {
         destination = "secrets/promtail.yml"
       }
       resources {
-        cpu    = 100
-        memory = 64
+        cpu        = 100
+        memory     = 64
         memory_max = 128
       }
     }

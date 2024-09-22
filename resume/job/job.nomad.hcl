@@ -15,7 +15,7 @@ job "resume" {
     count = 2
     update {
       max_parallel = 1
-      canary = 1
+      canary       = 1
       health_check = "task_states"
       auto_promote = true
     }
@@ -35,8 +35,8 @@ job "resume" {
         sidecar_service {}
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -58,8 +58,8 @@ job "resume" {
         }
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -110,8 +110,8 @@ job "resume" {
         destination = "secrets/promtail.yml"
       }
       resources {
-        cpu    = 100
-        memory = 64
+        cpu        = 100
+        memory     = 64
         memory_max = 128
       }
     }

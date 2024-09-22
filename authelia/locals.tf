@@ -1,6 +1,6 @@
 locals {
   stack_name = basename(path.cwd)
-  jobs = {}
+  jobs       = {}
   # jobs = {
   #   authelia = "${path.module}/job/job.nomad.hcl"
   # }

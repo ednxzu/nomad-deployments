@@ -1,0 +1,36 @@
+---
+repos:
+  - repo: https://github.com/tofuutils/pre-commit-opentofu
+    rev: v1.0.2
+    hooks:
+      - id: tofu_fmt
+      - id: tofu_docs
+        args:
+          - "--hook-config=--path-to-file=README.md"
+          - "--hook-config=--add-to-existing-file=true"
+          - "--hook-config=--create-file-if-not-exist=true"
+          - "--hook-config=--use-standard-markers=true"
+          - "--args=--escape=false"
+          - "--args=--lockfile=false"
+          - "--args=--indent 3"
+          - "--args=--show all"
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+  - repo: local
+    hooks:
+      - id: nomad-fmt
+        name: Nomad Format
+        entry: bash -c "nomad fmt -recursive || { exit 1; }"
+        language: system
+        types: [file]
+        files: \.hcl$
+        stages: [commit]
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v3.29.0
+    hooks:
+      - id: commitizen
+      - id: commitizen-branch
+        stages: [push]

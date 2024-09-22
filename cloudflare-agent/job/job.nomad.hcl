@@ -27,8 +27,8 @@ job "cloudflare-agent" {
         }
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -79,8 +79,8 @@ job "cloudflare-agent" {
         destination = "secrets/promtail.yml"
       }
       resources {
-        cpu    = 100
-        memory = 64
+        cpu        = 100
+        memory     = 64
         memory_max = 128
       }
     }

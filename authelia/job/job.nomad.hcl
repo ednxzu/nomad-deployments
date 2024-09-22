@@ -20,8 +20,8 @@ job "authelia" {
         sidecar_service {}
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -36,8 +36,8 @@ job "authelia" {
         sidecar_service {}
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -59,8 +59,8 @@ job "authelia" {
         }
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -138,8 +138,8 @@ job "authelia" {
         destination = "secrets/promtail.yml"
       }
       resources {
-        cpu    = 100
-        memory = 64
+        cpu        = 100
+        memory     = 64
         memory_max = 128
       }
     }
@@ -235,7 +235,7 @@ job "authelia" {
     count = 2
     update {
       max_parallel = 1
-      canary = 1
+      canary       = 1
       health_check = "task_states"
       auto_promote = true
     }
@@ -275,8 +275,8 @@ job "authelia" {
         }
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -298,8 +298,8 @@ job "authelia" {
         }
         sidecar_task {
           resources {
-            cpu    = 125
-            memory = 64
+            cpu        = 125
+            memory     = 64
             memory_max = 128
           }
         }
@@ -372,8 +372,8 @@ job "authelia" {
         destination = "secrets/promtail.yml"
       }
       resources {
-        cpu    = 100
-        memory = 64
+        cpu        = 100
+        memory     = 64
         memory_max = 128
       }
     }

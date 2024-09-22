@@ -71,8 +71,8 @@ No outputs.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement_terraform) | >= 1.0.0 |
 | <a name="requirement_consul"></a> [consul](#requirement_consul) | ~> 2.20.0 |
-| <a name="requirement_nomad"></a> [nomad](#requirement_nomad) | ~> 2.1.1 |
-| <a name="requirement_vault"></a> [vault](#requirement_vault) | ~> 3.25.0 |
+| <a name="requirement_nomad"></a> [nomad](#requirement_nomad) | ~> 2.3.0 |
+| <a name="requirement_vault"></a> [vault](#requirement_vault) | ~> 4.4.0 |
 
 ### Providers
 
@@ -82,7 +82,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_nomad_job"></a> [nomad_job](#module_nomad_job) | ../../../../../../modules/terraform-nomad-base// | n/a |
+| <a name="module_nomad_job"></a> [nomad_job](#module_nomad_job) | git::https://git.ednz.fr/terraform-registry/terraform-nomad-base.git// | v2.2.0 |
 
 ### Resources
 

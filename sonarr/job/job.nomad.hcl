@@ -73,7 +73,7 @@ job "sonarr" {
     task "sonarr" {
       driver = "docker"
       config {
-        image = "linuxserver/sonarr:develop@sha256:d80dede99023f3804e01ebe9a5e0a66cb8171a606fcbc2fd6738872ed034c9be"
+        image = "linuxserver/sonarr:develop@sha256:49f68f3ca2a322fe15fee15bcd1cb9390c23e6766aa64f0ef7f4fe862bd609be"
       }
       template {
         data        = base64decode(var.sonarr_sonarr_env)

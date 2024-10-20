@@ -46,7 +46,7 @@ job "traefik" {
         "traefik.http.routers.dashboard.service=api@internal",
         "traefik.http.routers.dashboard.tls=true",
         "traefik.http.routers.dashboard.tls.certresolver=cloudflare",
-        "traefik.http.routers.dashboard.middlewares=internal-acl@consulcatalog,authentik@consulcatalog",
+        "traefik.http.routers.dashboard.middlewares=internal-acl@consulcatalog",
         # service router setup (optional)
         "traefik.http.routers.ping.rule=Host(`traefik.ednz.fr`) && PathPrefix(`/ping`)",
         "traefik.http.routers.ping.service=ping@internal",
@@ -63,7 +63,12 @@ job "traefik" {
         # chain real-ip+bounce
         "traefik.http.middlewares.secured.chain.middlewares=real-ip@consulcatalog,bouncer@consulcatalog",
         # network ACLs middleware definition
-        "traefik.http.middlewares.internal-acl.ipallowlist.sourcerange=10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 127.0.0.1/32"
+        "traefik.http.middlewares.internal-acl.ipallowlist.sourcerange=10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 127.0.0.1/32",
+        # ForwardAuth middleware definition
+        "traefik.http.middlewares.authentik.forwardauth.address=http://localhost:9000/outpost.goauthentik.io/auth/traefik",
+        "traefik.http.middlewares.authentik.forwardauth.trustForwardHeader=true",
+        "traefik.http.middlewares.authentik.forwardauth.authResponseHeaders=X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid,X-authentik-jwt,X-authentik-meta-jwks,X-authentik-meta-outpost,X-authentik-meta-provider,X-authentik-meta-app,X-authentik-meta-version",
+
       ]
       connect {
         sidecar_service {
@@ -71,10 +76,6 @@ job "traefik" {
             upstreams {
               destination_name = "crowdsec-bouncer-traefik"
               local_bind_port  = 6666
-            }
-            upstreams {
-              destination_name = "authentik"
-              local_bind_port  = 9000
             }
           }
         }
@@ -188,6 +189,22 @@ job "traefik" {
       }
     }
 
+    task "authentik" {
+      driver = "docker"
+      config {
+        image = "ghcr.io/goauthentik/proxy:2024.8.3"
+      }
+      template {
+        data        = base64decode(var.authentik_authentik_env)
+        destination = "secrets/authentik.env"
+        env         = true
+      }
+      resources {
+        cpu    = 128
+        memory = 256
+      }
+    }
+
     task "logging-sidecar" {
       lifecycle {
         hook    = "poststart"
@@ -245,6 +262,10 @@ variable "loadbalancer_traefik_yml" {
 }
 
 variable "loadbalancer_ednz_ca_pem" {
+  type = string
+}
+
+variable "authentik_authentik_env" {
   type = string
 }
 

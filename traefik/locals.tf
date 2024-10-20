@@ -10,6 +10,7 @@ locals {
       loadbalancer_traefik_env     = base64encode(file("${path.module}/job/config/loadbalancer/traefik.env"))
       loadbalancer_traefik_yml     = base64encode(file("${path.module}/job/config/loadbalancer/traefik.yml"))
       loadbalancer_ednz_ca_pem     = base64encode(file("${path.module}/job/config/loadbalancer/ednz_ca.pem"))
+      authentik_authentik_env      = base64encode(file("${path.module}/job/config/authentik/authentik.env"))
       logging_sidecar_promtail_yml = base64encode(file("${path.module}/../_templates/logging-sidecar/promtail.yml"))
     }
   }

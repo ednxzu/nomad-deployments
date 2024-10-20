@@ -1,7 +1,7 @@
 locals {
   stack_name = basename(path.cwd)
   jobs = {
-    authentik = "${path.module}/job/job.nomad.hcl"
+    # authentik = "${path.module}/job/job.nomad.hcl"
   }
 
   jobs_variables = {
@@ -122,10 +122,10 @@ locals {
   consul_kv = {}
 
   consul_intentions = {
-    traefik-to-authentik = {
-      source_name      = "traefik"
-      destination_name = "authentik"
-      action           = "allow"
-    }
+    # traefik-to-authentik = {
+    #   source_name      = "traefik"
+    #   destination_name = "authentik"
+    #   action           = "allow"
+    # }
   }
 }

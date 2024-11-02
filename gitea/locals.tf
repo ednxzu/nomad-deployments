@@ -1,7 +1,7 @@
 locals {
   stack_name = basename(path.cwd)
   jobs = {
-    gitea = "${path.module}/job/job.nomad.hcl"
+    # gitea = "${path.module}/job/job.nomad.hcl"
   }
 
   jobs_variables = {

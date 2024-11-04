@@ -89,7 +89,7 @@ job "vaultwarden" {
       }
       driver = "docker"
       config {
-        image = "linuxserver/mariadb:10.11.8"
+        image = "linuxserver/mariadb:10.11.10"
       }
       template {
         data        = base64decode(var.mariadb_mariadb_env)

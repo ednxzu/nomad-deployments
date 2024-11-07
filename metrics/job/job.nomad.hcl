@@ -55,7 +55,7 @@ job "metrics" {
     task "prometheus" {
       driver = "docker"
       config {
-        image = "prom/prometheus:v2.55.0"
+        image = "prom/prometheus:v2.55.1"
         args = [
           "--config.file=/secrets/prometheus.yml",
           "--storage.tsdb.path=/prometheus",

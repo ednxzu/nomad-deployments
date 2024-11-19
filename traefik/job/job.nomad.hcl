@@ -130,7 +130,7 @@ job "traefik" {
         sidecar = true
       }
       config {
-        image        = "ednxzu/keepalived:2.3.1"
+        image        = "ednxzu/keepalived:2.3.2"
         network_mode = "host"
         cap_add = [
           "NET_ADMIN",

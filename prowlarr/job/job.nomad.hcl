@@ -77,7 +77,7 @@ job "prowlarr" {
     task "prowlarr" {
       driver = "docker"
       config {
-        image = "linuxserver/prowlarr:1.26.1"
+        image = "linuxserver/prowlarr:1.27.0"
       }
       template {
         data        = base64decode(var.prowlarr_prowlarr_env)

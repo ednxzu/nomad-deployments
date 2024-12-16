@@ -38,7 +38,7 @@ job "cloudflare-agent" {
     task "cloudflare-agent" {
       driver = "docker"
       config {
-        image = "favonia/cloudflare-ddns:latest@sha256:d5649aee7c9e8f7e14a6efd5f2aa0db78ff5eee597da4dc78d950cbf6131bef8"
+        image = "favonia/cloudflare-ddns:latest@sha256:a4e2089b3531eec8c9328c7a9a586f80e8d67dcd94856e0b596b7896e1de3f62"
       }
       template {
         data        = base64decode(var.cloudflare_agent_cloudflare_agent_env)

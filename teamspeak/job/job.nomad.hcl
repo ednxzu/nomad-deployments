@@ -48,7 +48,7 @@ job "teamspeak" {
     task "teamspeak" {
       driver = "docker"
       config {
-        image = "ich777/teamspeak:latest@sha256:604cdabd817c83a228e9720e514fd95fc46a0cae7ff7d9291f81765b425b1503"
+        image = "ich777/teamspeak:latest@sha256:261520b08eea32a6ecad19d6fdd77ff071d408b5a47c6f65971da07f20c9fc86"
         ports = ["teamspeak-admin"]
       }
       template {

@@ -102,7 +102,7 @@ job "qbittorrent" {
     task "qbittorrent" {
       driver = "docker"
       config {
-        image        = "linuxserver/qbittorrent:latest@sha256:3ba628a43848ccdbd84fc81826a012a42b85645b8380b662c5f2dd3bcb1cc83d"
+        image        = "linuxserver/qbittorrent:latest@sha256:ac0b4632429c647c71ba022c7e6ea3ae3496f6d1350dadc2f0e3c1d6d60f7845"
         network_mode = "container:wireguard-${NOMAD_ALLOC_ID}"
         cap_add = [
           "NET_ADMIN"

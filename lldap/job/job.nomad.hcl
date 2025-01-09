@@ -102,7 +102,7 @@ job "lldap" {
       }
       driver = "docker"
       config {
-        image = "linuxserver/mariadb:10.11.10"
+        image = "linuxserver/mariadb:11.4.4"
       }
       template {
         data        = base64decode(var.mariadb_mariadb_env)

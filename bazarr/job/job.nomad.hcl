@@ -73,7 +73,7 @@ job "bazarr" {
     task "bazarr" {
       driver = "docker"
       config {
-        image = "linuxserver/bazarr:latest@sha256:634d9a675a6fa0041062fb7dbed2a34e24bd9caed4502457c011a847fd146908"
+        image = "linuxserver/bazarr:latest@sha256:67039e2dc98163bfdff8c3c1fbb79f75649c8f28b447f5308fcf762a5572f19c"
       }
       template {
         data        = base64decode(var.bazarr_bazarr_env)

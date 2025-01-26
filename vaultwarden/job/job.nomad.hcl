@@ -65,7 +65,7 @@ job "vaultwarden" {
     task "vaultwarden" {
       driver = "docker"
       config {
-        image = "vaultwarden/server:1.32.7"
+        image = "vaultwarden/server:1.33.0"
       }
       template {
         data        = base64decode(var.vaultwarden_vaultwarden_env)

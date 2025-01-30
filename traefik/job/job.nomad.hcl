@@ -192,7 +192,7 @@ job "traefik" {
     task "authentik" {
       driver = "docker"
       config {
-        image = "ghcr.io/goauthentik/proxy:2024.12.2"
+        image = "ghcr.io/goauthentik/proxy:2024.12.3"
       }
       template {
         data        = base64decode(var.authentik_authentik_env)

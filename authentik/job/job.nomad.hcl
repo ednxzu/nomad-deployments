@@ -121,7 +121,7 @@ job "authentik" {
     task "authentik" {
       driver = "docker"
       config {
-        image   = "ghcr.io/goauthentik/server:2025.2.0"
+        image   = "ghcr.io/goauthentik/server:2025.2.1"
         command = "server"
         mount {
           type   = "bind"
@@ -151,7 +151,7 @@ job "authentik" {
     task "authentik-worker" {
       driver = "docker"
       config {
-        image   = "ghcr.io/goauthentik/server:2025.2.0"
+        image   = "ghcr.io/goauthentik/server:2025.2.1"
         command = "worker"
         mount {
           type   = "bind"

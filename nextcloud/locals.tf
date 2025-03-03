@@ -22,8 +22,8 @@ locals {
     nextcloud-config = {
       plugin_id    = "ceph-csi-rbd"
       namespace    = "default"
-      capacity_min = "1G"
-      capacity_max = "1G"
+      capacity_min = "2G"
+      capacity_max = "2G"
       capability = {
         access_mode     = "single-node-writer"
         attachment_mode = "file-system"

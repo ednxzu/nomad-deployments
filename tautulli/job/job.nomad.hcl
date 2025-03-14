@@ -61,7 +61,7 @@ job "tautulli" {
     task "tautulli" {
       driver = "docker"
       config {
-        image = "linuxserver/tautulli:latest@sha256:0fca01ac82c0a05f23da1077312edbddabbbab79419c508e4edfaaed73e02461"
+        image = "linuxserver/tautulli:latest@sha256:fa8f5736091fafa6d96e576c714caa634c0636463e81bd287fba28da2536a40e"
       }
       template {
         data        = base64decode(var.tautulli_tautulli_env)

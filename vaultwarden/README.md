@@ -74,7 +74,7 @@ No outputs.
 | <a name="requirement_terraform"></a> [terraform](#requirement_terraform) | >= 1.0.0 |
 | <a name="requirement_consul"></a> [consul](#requirement_consul) | ~> 2.20.0 |
 | <a name="requirement_nomad"></a> [nomad](#requirement_nomad) | ~> 2.3.0 |
-| <a name="requirement_vault"></a> [vault](#requirement_vault) | ~> 4.4.0 |
+| <a name="requirement_vault"></a> [vault](#requirement_vault) | ~> 4.5.0 |
 
 ### Providers
 

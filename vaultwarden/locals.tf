@@ -1,7 +1,7 @@
 locals {
   stack_name = basename(path.cwd)
   jobs = {
-    vaultwarden = "${path.module}/job/job.nomad.hcl"
+    # vaultwarden = "${path.module}/job/job.nomad.hcl"
   }
 
   jobs_variables = {

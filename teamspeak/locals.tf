@@ -1,7 +1,7 @@
 locals {
   stack_name = basename(path.cwd)
   jobs = {
-    teamspeak = "${path.module}/job/job.nomad.hcl"
+    # teamspeak = "${path.module}/job/job.nomad.hcl"
   }
 
   jobs_variables = {

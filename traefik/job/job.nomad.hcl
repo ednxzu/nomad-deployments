@@ -152,7 +152,7 @@ job "traefik" {
     task "loadbalancer" {
       driver = "docker"
       config {
-        image = "traefik:v3.3"
+        image = "traefik:v3.4"
         ports = [
           "http",
           "https",

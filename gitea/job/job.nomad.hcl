@@ -90,7 +90,7 @@ job "gitea" {
     task "redis" {
       driver = "docker"
       config {
-        image = "redis:7.4"
+        image = "redis:8.0"
         args = [
           "--requirepass $${REDIS_PASSWORD}",
         ]

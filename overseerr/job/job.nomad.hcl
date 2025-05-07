@@ -72,7 +72,7 @@ job "overseerr" {
     task "overseerr" {
       driver = "docker"
       config {
-        image = "linuxserver/overseerr@sha256:1c141ae4fd6e07bf4afa157360c64d8f1a4aed56cf964f79f9db86ca588cd2ab"
+        image = "linuxserver/overseerr@sha256:b3f7885d699434e6409ff79298c8a65fdab5ea0fbf58fbb595c18d8a40950ef7"
       }
       template {
         data        = base64decode(var.overseerr_overseerr_env)

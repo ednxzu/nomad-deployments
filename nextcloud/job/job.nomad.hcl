@@ -168,7 +168,7 @@ job "nextcloud" {
       }
       driver = "docker"
       config {
-        image = "redis:8.0"
+        image = "redis:8.2"
         args = [
           "--requirepass $${REDIS_PASSWORD}",
         ]

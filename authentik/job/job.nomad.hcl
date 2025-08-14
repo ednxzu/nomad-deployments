@@ -217,7 +217,7 @@ job "authentik" {
       }
       driver = "docker"
       config {
-        image = "postgres:17.5"
+        image = "postgres:17.6"
       }
       template {
         data        = base64decode(var.postgres_postgres_env)

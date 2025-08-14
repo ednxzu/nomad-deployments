@@ -78,7 +78,7 @@ job "lldap" {
     task "lldap" {
       driver = "docker"
       config {
-        image = "ghcr.io/lldap/lldap:latest@sha256:18ec9f6a8df6ab3c47396a4cd0b0bd38fc26328f4e3b4a06b52843bc3016445d"
+        image = "ghcr.io/lldap/lldap:latest@sha256:4ca4173d08daea69a079c69d394f2d42b1416f4d05d8833e34b45f641b783f58"
       }
       template {
         data        = base64decode(var.lldap_lldap_env)

@@ -87,7 +87,7 @@ job "nextcloud" {
     task "nextcloud" {
       driver = "docker"
       config {
-        image = "nextcloud:31.0.7"
+        image = "nextcloud:31.0.8"
       }
       template {
         data        = base64decode(var.nextcloud_nextcloud_env)
@@ -115,7 +115,7 @@ job "nextcloud" {
       }
       driver = "docker"
       config {
-        image      = "nextcloud:31.0.7"
+        image      = "nextcloud:31.0.8"
         entrypoint = ["/cron.sh"]
       }
       template {

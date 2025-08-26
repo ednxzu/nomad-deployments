@@ -70,7 +70,7 @@ job "gitea" {
     task "mariadb" {
       driver = "docker"
       config {
-        image = "linuxserver/mariadb:11.4.5"
+        image = "linuxserver/mariadb:11.4.8"
       }
       template {
         data        = base64decode(var.mariadb_mariadb_env)

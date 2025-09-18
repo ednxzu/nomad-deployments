@@ -88,7 +88,7 @@ job "atlantis" {
     task "atlantis" {
       driver = "docker"
       config {
-        image   = "ghcr.io/runatlantis/atlantis:v0.35.1"
+        image   = "ghcr.io/runatlantis/atlantis:v0.36.0"
         command = "server"
         args = [
           "--atlantis-url=${ATLANTIS_URL}",

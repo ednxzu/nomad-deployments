@@ -70,7 +70,7 @@ job "crowdsec" {
     task "crowdsec-api" {
       driver = "docker"
       config {
-        image = "crowdsecurity/crowdsec:v1.7.0"
+        image = "crowdsecurity/crowdsec:v1.7.2"
         mount {
           type   = "bind"
           source = "local/acquis-loki.yaml"

@@ -332,7 +332,7 @@ job "gitea" {
     task "gitea" {
       driver = "docker"
       config {
-        image = "gitea/gitea:1.24"
+        image = "gitea/gitea:1.25"
       }
       template {
         data        = base64decode(var.gitea_gitea_env)

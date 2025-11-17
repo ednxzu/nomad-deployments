@@ -73,7 +73,7 @@ job "radarr" {
     task "radarr" {
       driver = "docker"
       config {
-        image = "linuxserver/radarr:5.28.0"
+        image = "linuxserver/radarr:6.0.4"
       }
       template {
         data        = base64decode(var.radarr_radarr_env)

@@ -190,7 +190,7 @@ job "authentik" {
       }
       driver = "docker"
       config {
-        image = "redis:8.2"
+        image = "redis:8.4"
         args = [
           "--requirepass $${REDIS_PASSWORD}",
         ]

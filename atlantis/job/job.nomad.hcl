@@ -66,7 +66,7 @@ job "atlantis" {
         sidecar = false
       }
       config {
-        image      = "alpine:3.22"
+        image      = "alpine:3.23"
         entrypoint = ["${NOMAD_TASK_DIR}/entrypoint.sh"]
       }
       template {

@@ -86,7 +86,7 @@ job "metrics" {
     task "loki" {
       driver = "docker"
       config {
-        image = "grafana/loki:latest@sha256:fad94db64eeb0e14544953789c942453df68a860b6f760d867f06c5b31f461ab"
+        image = "grafana/loki:latest@sha256:cd6e176883a90c21755f0315688668991634143423f75bdedfef41441b0fdc3c"
         args = [
           "-config.file=/etc/loki/loki.yml"
         ]
